@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using ContactsWebApi.Models;
 using ContactsWebApi.Repositories;
 using ContactsWebApi.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ContactsWebApi.Controllers
@@ -22,7 +18,8 @@ namespace ContactsWebApi.Controllers
             _contactRepository = contactRepository;
             _contactService = contactService;
         }
-
+        #region HTTP-GET
+        
         // GET api/contacts
         [HttpGet]
         public ActionResult<List<Contact>> GetContacts()
@@ -37,7 +34,8 @@ namespace ContactsWebApi.Controllers
             var contact = _contactService.Read(id);
             return new JsonResult(contact);
         }
-
+        #endregion
+        #region HTTP - Post
         // POST api/Contact
         [HttpPost]
         public ActionResult<Contact> Post(Contact contact)
@@ -46,6 +44,8 @@ namespace ContactsWebApi.Controllers
             return new JsonResult(newContact);
         }
 
+        #endregion
+        #region HTTP - PUT
         // PUT: api/Contacts/5
         [HttpPut("{id}")]
         public ActionResult<Contact> Put(int id, Contact contact)
@@ -53,13 +53,14 @@ namespace ContactsWebApi.Controllers
             var updateContact = _contactService.Update(id, contact);
             return new JsonResult(updateContact);
         }
-
+        #endregion
+        #region HTTP - DELETE
         // DELETE api/contacts/5
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
-            _contactRepository.Delete(id);
-            return new NoContentResult();
+            return _contactService.Delete(id);            
         }
+        #endregion
     }
 }

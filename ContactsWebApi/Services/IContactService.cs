@@ -14,6 +14,6 @@ namespace ContactsWebApi.Services
         List<Contact> Read();
         Contact Read(int id);
         Contact Update(int id, Contact contact);
-        void Delete(int id);
+        StatusCodeResult Delete(int id);
     }
 }

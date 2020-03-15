@@ -38,10 +38,11 @@ namespace ContactsWebApi
             }
             );
 
-            // ignore json serialization
-            services.AddMvc().AddJsonOptions(json =>
-            json.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
-
+            {
+// ignore json serialization
+                services.AddMvc().AddJsonOptions(json =>
+                    json.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+            }
             // CORS Policy
             services.AddCors(o => o.AddPolicy("ContactsAppPolicy",
                 builder => { builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader(); }));
